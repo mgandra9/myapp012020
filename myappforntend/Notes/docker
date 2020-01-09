@@ -1,0 +1,26 @@
+docker pull httpd:2.4  -- pull image httpd 2.4 from dockerhub
+docker pull httpd  --- will pull the latest image from the docker hub
+docker images -- will display the local images
+docker inspect imagename(httpd:2.4) -- will display the metadat of the image
+docker inspect container name(
+sudo usermod -aG docker ec2-user  -- adds ec2-user to docker group so the user can run the docker commands
+docker run -d --name apachetest httpd:2.4  -- to launch container with the image httpd tag 2.4
+docker inspect apachetest -- 
+docker ps -- to show running containers
+docker ps -a  -- to show running and stopped containers
+docker stop apachetest(container name)
+docket start apachetest(container name)
+docker inspect apachetest|grep Pid -- will get the pid of the running container
+apache will be running as process id (XXXX) in base machine but will be ruiing as process id 1 in container
+ps -eaf|grep 1129
+docker exec apachetest cat /etc/hosts  -- exec is to execute command in the container
+docker exec -it apachetest /bin/bash   -- to login to container use -it(interactive terminal) otherwise docker will expect commands to execute
+exit or ctrl + d -- to get oit of container
+ docker stop apachetest;docker rm apachetest -- we have stop the container before removing it
+ -----------------------------------------------------------------------------------------------------------
+ ps -efa|grep docker
+root      2682     1  0 18:55 ?        00:00:08 /usr/bin/dockerd --default-ulimit nofile=1024:4096
+root      2692  2682  0 18:55 ?        00:00:05 containerd --config /var/run/docker/containerd/containerd.toml --log-level info
+ec2-user  3475 31468  0 21:25 pts/6    00:00:00 grep --color=auto docker
+dockerd will be the main process and inside it will have containerd and runc
+--------------------------------------------------------------------------------------------------------------
